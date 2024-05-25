@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1010786257076",
+    "project_id": "chahele-learning-app",
+    "storage_bucket": "chahele-learning-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010786257076:android:d39b802d38294e5d426fe1",
+        "android_client_info": {
+          "package_name": "com.chahel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALH7795xvCu8i375cuR1uGfMiGaF3_Fk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010786257076:android:f0aa6da1e6cafaa8426fe1",
+        "android_client_info": {
+          "package_name": "com.chahele"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALH7795xvCu8i375cuR1uGfMiGaF3_Fk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

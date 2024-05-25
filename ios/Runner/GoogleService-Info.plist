@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1010786257076-3bed84gfq2o2usl5b9af6u7htqja174o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1010786257076-3bed84gfq2o2usl5b9af6u7htqja174o</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1010786257076-1ub23qq92p5mbncr0m9h51889i571tkm.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDzLCUvBGhji8iRyOxjSUyUuF2os45hMnU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1010786257076</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.chahel.elearning</string>
+	<key>PROJECT_ID</key>
+	<string>chahele-learning-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chahele-learning-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1010786257076:ios:cadcfaa8372fc6ef426fe1</string>
+</dict>
+</plist>
