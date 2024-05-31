@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:chahele_project/app_data.dart';
+import 'package:chahele_project/controller/applepay_config.dart';
 import 'package:chahele_project/controller/authentication_provider.dart';
 import 'package:chahele_project/controller/payment_gateway.dart';
 import 'package:chahele_project/controller/payment_gateway_controller.dart';
@@ -15,6 +16,7 @@ import 'package:chahele_project/widgets/custom_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 class SubscriptionScreen extends StatefulWidget {
@@ -240,131 +242,168 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 ),
                 const Gap(16),
                 const Gap(32),
+                // ElevatedButton(onPressed: (){
+                //   log(planProvider.planList[selectedPlan].totalAmount!.toString());
+                // }, child: Text('test')),
 
                 //purchase button
 
-                gatewayProvider.gatewayData?.isWhatsApp == false
-                    ? ButtonWidget(
-                        buttonHeight: 50,
-                        buttonWidth: 240,
-                        buttonColor: ConstantColors.lightBlueTheme,
-                        buttonText: "Purchase",
-                        textColor: ConstantColors.headingBlue,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PhonePePaymentGateway(
-                                  paymentAmount: planProvider
-                                      .planList[selectedPlan].totalAmount!,
-                                  planController: planProvider,
-                                  gatewayController: gatewayProvider,
-                                  onSuccess: () async {
-                                    await planProvider.purchasePlanUser(
-                                      userId: authProvider
-                                          .firebaseAuth.currentUser!.uid,
-                                      purchasedPlan: PlanModel(
-                                        startDate: startDate,
-                                        endDate: planProvider
-                                                    .planList[selectedPlan]
-                                                    .planDuration ==
-                                                1
-                                            ? Timestamp.fromMillisecondsSinceEpoch(
-                                                startDate
-                                                        .millisecondsSinceEpoch +
-                                                    (30 * 24 * 60 * 60 * 1000))
-                                            : Timestamp.fromMillisecondsSinceEpoch(
-                                                startDate
-                                                        .millisecondsSinceEpoch +
-                                                    (365 *
-                                                        24 *
-                                                        60 *
-                                                        60 *
-                                                        1000)),
-                                        totalAmount: planProvider
-                                            .planList[selectedPlan]
-                                            .totalAmount!,
-                                        planDuration: planProvider
-                                            .planList[selectedPlan]
-                                            .planDuration!,
-                                        userId: authProvider
-                                            .firebaseAuth.currentUser!.uid,
-                                        medium: planProvider
-                                            .planList[selectedPlan].medium!,
-                                        standard: planProvider
-                                            .planList[selectedPlan].standard!,
-                                        id: planProvider
-                                            .planList[selectedPlan].id,
-                                        medId: planProvider.dropMediumValue,
-                                        stdId: planProvider.dropClassValue,
-                                      ),
-                                      onSuccess: () {
-                                        Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const BottomNavigationWidget(),
-                                            ),
-                                            (route) => false);
-                                        successToast(
-                                            context, "Purchsase Successfull");
-                                      },
-                                    );
-                                  },
-                                  onFailure: () {
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const BottomNavigationWidget(),
-                                        ),
-                                        (route) => false);
-                                    successToast(context, "Purchase Failed");
-                                  },
-                                ),
-                              ));
-                        },
-                      )
-                    //WhatsApp Button
-                    : GestureDetector(
-                        onTap: () {
-                          String message =
-                              "Hey there! 👋 I've been using Chahel The E Learning App for a while now and I'm really impressed with the quality of content and resources available. I've decided it's time to take my learning to the next level! Could you please provide me with the details to buy a plan ? 📚💻";
-                          planProvider
-                              .redirectToWhatsapp(
-                                  'https://api.whatsapp.com/send?phone=${AppDetails.whatsappNumber}&text=$message')
-                              .then((value) => Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const BottomNavigationWidget(),
-                                  )));
-                        },
-                        child: Container(
-                          height: 50,
-                          width: 250,
-                          decoration: BoxDecoration(
-                              color: ConstantColors.lightBlueTheme,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                ConstantImage.whatsAppPng,
-                                height: 25,
-                                width: 25,
-                              ),
-                              const Gap(5),
-                              const Text(
-                                "Contact Us",
-                                style: TextStyle(
-                                    color: ConstantColors.headingBlue,
-                                    fontWeight: FontWeight.w600),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                ApplePayButton(
+                  paymentConfiguration:
+                      PaymentConfiguration.fromJsonString(defaultApplePay),
+                  paymentItems: [
+                    PaymentItem(
+                        label: 'Course Amount',
+                        status: PaymentItemStatus.final_price,
+                        amount:
+                            '${planProvider.planList[selectedPlan].totalAmount!}'),
+                    PaymentItem(
+                        amount:
+                            '${planProvider.planList[selectedPlan].totalAmount!}',
+                        label: ' Total',
+                        status: PaymentItemStatus.final_price),
+                    // PaymentItem(
+                    //     amount: '0.02',
+                    //     label: 'Total',
+                    //     status: PaymentItemStatus.final_price)
+                  ],
+                  height: 50,
+                  width: 240,
+                  style: ApplePayButtonStyle.white,
+                  loadingIndicator: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  // onPaymentResult: (result) {
+                  //   log('Payment Result: $result');
+                  // },
+                  type: ApplePayButtonType.buy,
+                ),
+
+                // gatewayProvider.gatewayData?.isWhatsApp == false
+                //     ?
+                // ButtonWidget(
+                //     buttonHeight: 50,
+                //     buttonWidth: 240,
+                //     buttonColor: ConstantColors.lightBlueTheme,
+                //     buttonText: "Purchase",
+                //     textColor: ConstantColors.headingBlue,
+                //     onPressed: () {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) {
+                //               return PhonePePaymentGateway(
+                //               paymentAmount: planProvider
+                //                   .planList[selectedPlan].totalAmount!,
+                //               planController: planProvider,
+                //               gatewayController: gatewayProvider,
+                //               onSuccess: () async {
+                //                 await planProvider.purchasePlanUser(
+                //                   userId: authProvider
+                //                       .firebaseAuth.currentUser!.uid,
+                //                   purchasedPlan: PlanModel(
+                //                     startDate: startDate,
+                //                     endDate: planProvider
+                //                                 .planList[selectedPlan]
+                //                                 .planDuration ==
+                //                             1
+                //                         ? Timestamp.fromMillisecondsSinceEpoch(
+                //                             startDate
+                //                                     .millisecondsSinceEpoch +
+                //                                 (30 * 24 * 60 * 60 * 1000))
+                //                         : Timestamp.fromMillisecondsSinceEpoch(
+                //                             startDate
+                //                                     .millisecondsSinceEpoch +
+                //                                 (365 *
+                //                                     24 *
+                //                                     60 *
+                //                                     60 *
+                //                                     1000)),
+                //                     totalAmount: planProvider
+                //                         .planList[selectedPlan]
+                //                         .totalAmount!,
+                //                     planDuration: planProvider
+                //                         .planList[selectedPlan]
+                //                         .planDuration!,
+                //                     userId: authProvider
+                //                         .firebaseAuth.currentUser!.uid,
+                //                     medium: planProvider
+                //                         .planList[selectedPlan].medium!,
+                //                     standard: planProvider
+                //                         .planList[selectedPlan].standard!,
+                //                     id: planProvider
+                //                         .planList[selectedPlan].id,
+                //                     medId: planProvider.dropMediumValue,
+                //                     stdId: planProvider.dropClassValue,
+                //                   ),
+                //                   onSuccess: () {
+                //                     Navigator.pushAndRemoveUntil(
+                //                         context,
+                //                         MaterialPageRoute(
+                //                           builder: (context) =>
+                //                               const BottomNavigationWidget(),
+                //                         ),
+                //                         (route) => false);
+                //                     successToast(
+                //                         context, "Purchsase Successfull");
+                //                   },
+                //                 );
+                //               },
+                //               onFailure: () {
+                //                 Navigator.pushAndRemoveUntil(
+                //                     context,
+                //                     MaterialPageRoute(
+                //                       builder: (context) =>
+                //                           const BottomNavigationWidget(),
+                //                     ),
+                //                     (route) => false);
+                //                 successToast(context, "Purchase Failed");
+                //               },
+                //             );
+                //             },
+                //           ));
+                //     },
+                //   )
+                // //WhatsApp Button
+                // : GestureDetector(
+                //     onTap: () {
+                //       String message =
+                //           "Hey there! 👋 I've been using Chahel The E Learning App for a while now and I'm really impressed with the quality of content and resources available. I've decided it's time to take my learning to the next level! Could you please provide me with the details to buy a plan ? 📚💻";
+                //       planProvider
+                //           .redirectToWhatsapp(
+                //               'https://api.whatsapp.com/send?phone=${AppDetails.whatsappNumber}&text=$message')
+                //           .then((value) => Navigator.pushReplacement(
+                //               context,
+                //               MaterialPageRoute(
+                //                 builder: (context) =>
+                //                     const BottomNavigationWidget(),
+                //               )));
+                //     },
+                //     child: Container(
+                //       height: 50,
+                //       width: 250,
+                //       decoration: BoxDecoration(
+                //           color: ConstantColors.lightBlueTheme,
+                //           borderRadius: BorderRadius.circular(10)),
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.center,
+                //         children: [
+                //           Image.asset(
+                //             ConstantImage.whatsAppPng,
+                //             height: 25,
+                //             width: 25,
+                //           ),
+                //           const Gap(5),
+                //           const Text(
+                //             "Contact Us",
+                //             style: TextStyle(
+                //                 color: ConstantColors.headingBlue,
+                //                 fontWeight: FontWeight.w600),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //   ),
                 const Gap(24),
 
                 const Text(

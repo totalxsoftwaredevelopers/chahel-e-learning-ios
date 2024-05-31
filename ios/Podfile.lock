@@ -1172,6 +1172,8 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - pay_ios (0.0.1):
+    - Flutter
   - permission_handler_apple (9.3.0):
     - Flutter
   - phonepe_payment_sdk (1.1.0):
@@ -1216,6 +1218,7 @@ DEPENDENCIES:
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - phonepe_payment_sdk (from `.symlinks/plugins/phonepe_payment_sdk/ios`)
   - rive_common (from `.symlinks/plugins/rive_common/ios`)
@@ -1282,6 +1285,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  pay_ios:
+    :path: ".symlinks/plugins/pay_ios/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   phonepe_payment_sdk:
@@ -1340,6 +1345,7 @@ SPEC CHECKSUMS:
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
+  pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
   permission_handler_apple: 036b856153a2b1f61f21030ff725f3e6fece2b78
   phonepe_payment_sdk: 62696b0fa1265e9c5111ff0af49eda3cb5d58012
   PhonePePayment: 13abece65df5d9ca6f976b001e7a91112b5c2107

@@ -135,264 +135,264 @@ class _ChooseAlternateState extends State<ChooseAlternate> {
                               buttonColor: ConstantColors.mainBlueTheme,
                               buttonText: "Join",
                               onPressed: () {
-                                if (gatewayProvider.gatewayData!.iosJoin ==
-                                    true) {
-                                  String message = "Hey there! 👋";
-                                  planController
-                                      .redirectToWhatsapp(
-                                          'https://wa.me/${AppDetails.whatsappNumber}?text=$message')
-                                      .then(
-                                        (value) => Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BottomNavigationWidget(),
-                                          ),
-                                        ),
-                                      );
-                                } else {
-                                  planController.redirectToLink(
-                                    link:
-                                        'mailto:<${AppDetails.email}>?subject=&body=',
-                                    onFailure: () async {
-                                      await Clipboard.setData(
-                                          const ClipboardData(
-                                              text: AppDetails.email));
-                                      successToast(context, "Email Copied");
-                                    },
-                                  );
-                                }
+                                // if (gatewayProvider.gatewayData!.iosJoin ==
+                                //     true) {
+                                //   String message = "Hey there! 👋";
+                                //   planController
+                                //       .redirectToWhatsapp(
+                                //           'https://wa.me/${AppDetails.whatsappNumber}?text=$message')
+                                //       .then(
+                                //         (value) => Navigator.pushReplacement(
+                                //           context,
+                                //           MaterialPageRoute(
+                                //             builder: (context) =>
+                                //                 const BottomNavigationWidget(),
+                                //           ),
+                                //         ),
+                                //       );
+                                // } else {
+                                //   planController.redirectToLink(
+                                //     link:
+                                //         'mailto:<${AppDetails.email}>?subject=&body=',
+                                //     onFailure: () async {
+                                //       await Clipboard.setData(
+                                //           const ClipboardData(
+                                //               text: AppDetails.email));
+                                //       successToast(context, "Email Copied");
+                                //     },
+                                //   );
+                                // }
 
                                 //Class Dialogue
 
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (context) => Material(
-                                //     type: MaterialType.transparency,
-                                //     child: Padding(
-                                //       padding: const EdgeInsets.all(16),
-                                //       child: Center(
-                                //         child: StatefulBuilder(
-                                //           builder: (context, classState) {
-                                //             return Container(
-                                //               width: screenWidth,
-                                //               decoration: BoxDecoration(
-                                //                 borderRadius:
-                                //                     BorderRadius.circular(16),
-                                //                 color: ConstantColors.white,
-                                //               ),
-                                //               child: Padding(
-                                //                 padding:
-                                //                     const EdgeInsets.all(16),
-                                //                 child: Column(
-                                //                   mainAxisSize:
-                                //                       MainAxisSize.min,
-                                //                   crossAxisAlignment:
-                                //                       CrossAxisAlignment.start,
-                                //                   children: [
-                                //                     const Text(
-                                //                       "Standard",
-                                //                       style: TextStyle(
-                                //                           fontSize: 14,
-                                //                           fontWeight:
-                                //                               FontWeight.w600,
-                                //                           color: ConstantColors
-                                //                               .headingBlue),
-                                //                     ),
-                                //                     const Gap(8),
-                                //                     DropdownButton(
-                                //                       isExpanded: true,
-                                //                       hint: const Text(
-                                //                           "Select STD"),
-                                //                       value: planController
-                                //                           .dropClassValue,
-                                //                       items: courseProvider
-                                //                           .planStandardList
-                                //                           .map<
-                                //                               DropdownMenuItem<
-                                //                                   String>>(
-                                //                         (StandardModel
-                                //                             classItem) {
-                                //                           return DropdownMenuItem(
-                                //                             value:
-                                //                                 classItem.id ??
-                                //                                     "dfdfd",
-                                //                             child: Text(classItem
-                                //                                 .standard
-                                //                                 .toString()),
-                                //                           );
-                                //                         },
-                                //                       ).toList(),
-                                //                       onChanged: (String?
-                                //                           classValue) async {
-                                //                         classState(() {
-                                //                           planController
-                                //                                   .dropClassValue =
-                                //                               classValue!;
-                                //                         });
-                                //                         if (classValue !=
-                                //                             null) {
-                                //                           await planController
-                                //                               .fetchPlanMediumData(
-                                //                                   classValue);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => Material(
+                                    type: MaterialType.transparency,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Center(
+                                        child: StatefulBuilder(
+                                          builder: (context, classState) {
+                                            return Container(
+                                              width: screenWidth,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                color: ConstantColors.white,
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      "Standard",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: ConstantColors
+                                                              .headingBlue),
+                                                    ),
+                                                    const Gap(8),
+                                                    DropdownButton(
+                                                      isExpanded: true,
+                                                      hint: const Text(
+                                                          "Select STD"),
+                                                      value: planController
+                                                          .dropClassValue,
+                                                      items: courseProvider
+                                                          .planStandardList
+                                                          .map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                        (StandardModel
+                                                            classItem) {
+                                                          return DropdownMenuItem(
+                                                            value:
+                                                                classItem.id ??
+                                                                    "dfdfd",
+                                                            child: Text(classItem
+                                                                .standard
+                                                                .toString()),
+                                                          );
+                                                        },
+                                                      ).toList(),
+                                                      onChanged: (String?
+                                                          classValue) async {
+                                                        classState(() {
+                                                          planController
+                                                                  .dropClassValue =
+                                                              classValue!;
+                                                        });
+                                                        if (classValue !=
+                                                            null) {
+                                                          await planController
+                                                              .fetchPlanMediumData(
+                                                                  classValue);
 
-                                //                           log(classValue);
-                                //                         }
-                                //                       },
-                                //                     ),
-                                //                     const Gap(8),
-                                //                     const Gap(16),
-                                //                     ButtonWidget(
-                                //                       buttonHeight: 42,
-                                //                       buttonWidth: screenWidth,
-                                //                       buttonColor:
-                                //                           ConstantColors
-                                //                               .headingBlue,
-                                //                       buttonText:
-                                //                           "Choose Medium",
-                                //                       onPressed: () {
-                                //                         Navigator.pop(context);
+                                                          log(classValue);
+                                                        }
+                                                      },
+                                                    ),
+                                                    const Gap(8),
+                                                    const Gap(16),
+                                                    ButtonWidget(
+                                                      buttonHeight: 42,
+                                                      buttonWidth: screenWidth,
+                                                      buttonColor:
+                                                          ConstantColors
+                                                              .headingBlue,
+                                                      buttonText:
+                                                          "Choose Medium",
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
 
-                                //                         //Medium Dialogue
+                                                        //Medium Dialogue
 
-                                //                         showDialog(
-                                //                           context: context,
-                                //                           builder: (context) =>
-                                //                               Material(
-                                //                             type: MaterialType
-                                //                                 .transparency,
-                                //                             child: Padding(
-                                //                               padding:
-                                //                                   const EdgeInsets
-                                //                                       .all(16),
-                                //                               child: Center(
-                                //                                 child:
-                                //                                     Container(
-                                //                                   width:
-                                //                                       screenWidth,
-                                //                                   decoration:
-                                //                                       BoxDecoration(
-                                //                                     borderRadius:
-                                //                                         BorderRadius.circular(
-                                //                                             16),
-                                //                                     color: ConstantColors
-                                //                                         .white,
-                                //                                   ),
-                                //                                   child:
-                                //                                       Padding(
-                                //                                     padding:
-                                //                                         const EdgeInsets
-                                //                                             .all(
-                                //                                             16),
-                                //                                     child:
-                                //                                         Column(
-                                //                                       mainAxisSize:
-                                //                                           MainAxisSize
-                                //                                               .min,
-                                //                                       crossAxisAlignment:
-                                //                                           CrossAxisAlignment
-                                //                                               .start,
-                                //                                       children: [
-                                //                                         const Text(
-                                //                                           "Medium",
-                                //                                           style: TextStyle(
-                                //                                               fontSize: 14,
-                                //                                               fontWeight: FontWeight.w600,
-                                //                                               color: ConstantColors.headingBlue),
-                                //                                         ),
-                                //                                         const Gap(
-                                //                                             8),
-                                //                                         StatefulBuilder(builder:
-                                //                                             (context,
-                                //                                                 setState) {
-                                //                                           return DropdownButton<
-                                //                                               String>(
-                                //                                             hint:
-                                //                                                 const Text("Select Medium"),
-                                //                                             value:
-                                //                                                 planController.dropMediumValue,
-                                //                                             items: planController
-                                //                                                     .planMediumList.isNotEmpty
-                                //                                                 ? planController.planMediumList.map<
-                                //                                                     DropdownMenuItem<
-                                //                                                         String>>(
-                                //                                                     (MediumModel mediumItem) {
-                                //                                                       return DropdownMenuItem(
-                                //                                                         value: mediumItem.id,
-                                //                                                         child: Text(mediumItem.medium.toString()),
-                                //                                                       );
-                                //                                                     },
-                                //                                                   ).toList()
-                                //                                                 : [
-                                //                                                     const DropdownMenuItem(child: Text("No Data Found"))
-                                //                                                   ],
-                                //                                             onChanged:
-                                //                                                 (String? mediumValue) {
-                                //                                               setState(() {
-                                //                                                 planController.dropMediumValue = mediumValue!;
-                                //                                               });
-                                //                                               log("med id : $mediumValue");
-                                //                                             },
-                                //                                           );
-                                //                                         }),
-                                //                                         const Gap(
-                                //                                             8),
-                                //                                         const Gap(
-                                //                                             16),
-                                //                                         ButtonWidget(
-                                //                                             buttonHeight:
-                                //                                                 42,
-                                //                                             buttonWidth:
-                                //                                                 screenWidth,
-                                //                                             buttonColor: ConstantColors
-                                //                                                 .headingBlue,
-                                //                                             buttonText:
-                                //                                                 "Choose My Course",
-                                //                                             onPressed:
-                                //                                                 () {
-                                //                                               bool exist = planController.userData?.purchaseDetails?.any((detail) => detail.medId == planController.dropMediumValue && detail.stdId == planController.dropClassValue) ?? false;
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              Material(
+                                                            type: MaterialType
+                                                                .transparency,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(16),
+                                                              child: Center(
+                                                                child:
+                                                                    Container(
+                                                                  width:
+                                                                      screenWidth,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            16),
+                                                                    color: ConstantColors
+                                                                        .white,
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            16),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .min,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        const Text(
+                                                                          "Medium",
+                                                                          style: TextStyle(
+                                                                              fontSize: 14,
+                                                                              fontWeight: FontWeight.w600,
+                                                                              color: ConstantColors.headingBlue),
+                                                                        ),
+                                                                        const Gap(
+                                                                            8),
+                                                                        StatefulBuilder(builder:
+                                                                            (context,
+                                                                                setState) {
+                                                                          return DropdownButton<
+                                                                              String>(
+                                                                            hint:
+                                                                                const Text("Select Medium"),
+                                                                            value:
+                                                                                planController.dropMediumValue,
+                                                                            items: planController
+                                                                                    .planMediumList.isNotEmpty
+                                                                                ? planController.planMediumList.map<
+                                                                                    DropdownMenuItem<
+                                                                                        String>>(
+                                                                                    (MediumModel mediumItem) {
+                                                                                      return DropdownMenuItem(
+                                                                                        value: mediumItem.id,
+                                                                                        child: Text(mediumItem.medium.toString()),
+                                                                                      );
+                                                                                    },
+                                                                                  ).toList()
+                                                                                : [
+                                                                                    const DropdownMenuItem(child: Text("No Data Found"))
+                                                                                  ],
+                                                                            onChanged:
+                                                                                (String? mediumValue) {
+                                                                              setState(() {
+                                                                                planController.dropMediumValue = mediumValue!;
+                                                                              });
+                                                                              log("med id : $mediumValue");
+                                                                            },
+                                                                          );
+                                                                        }),
+                                                                        const Gap(
+                                                                            8),
+                                                                        const Gap(
+                                                                            16),
+                                                                        ButtonWidget(
+                                                                            buttonHeight:
+                                                                                42,
+                                                                            buttonWidth:
+                                                                                screenWidth,
+                                                                            buttonColor: ConstantColors
+                                                                                .headingBlue,
+                                                                            buttonText:
+                                                                                "Choose My Course",
+                                                                            onPressed:
+                                                                                () {
+                                                                              bool exist = planController.userData?.purchaseDetails?.any((detail) => detail.medId == planController.dropMediumValue && detail.stdId == planController.dropClassValue) ?? false;
 
-                                //                                               if (exist) {
-                                //                                                 failedToast(context, "Course already exists! Choose another Course");
-                                //                                               } else if (planController.dropMediumValue == null) {
-                                //                                                 failedToast(context, "Select your medium");
-                                //                                               } else {
-                                //                                                 Navigator.pop(context);
-                                //                                                 Navigator.push(
-                                //                                                   context,
-                                //                                                   MaterialPageRoute(
-                                //                                                     builder: (context) => SubscriptionScreen(
-                                //                                                       stdId: planController.dropClassValue!,
-                                //                                                       medId: planController.dropMediumValue!,
-                                //                                                     ),
-                                //                                                   ),
-                                //                                                 );
-                                //                                                 // planController.dropClassValue =
-                                //                                                 //     null;
-                                //                                                 // planController.dropMediumValue =
-                                //                                                 //     null;
-                                //                                               }
-                                //                                             })
-                                //                                       ],
-                                //                                     ),
-                                //                                   ),
-                                //                                 ),
-                                //                               ),
-                                //                             ),
-                                //                           ),
-                                //                         );
-                                //                       },
-                                //                     )
-                                //                   ],
-                                //                 ),
-                                //               ),
-                                //             );
-                                //           },
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // );
+                                                                              if (exist) {
+                                                                                failedToast(context, "Course already exists! Choose another Course");
+                                                                              } else if (planController.dropMediumValue == null) {
+                                                                                failedToast(context, "Select your medium");
+                                                                              } else {
+                                                                                Navigator.pop(context);
+                                                                                Navigator.push(
+                                                                                  context,
+                                                                                  MaterialPageRoute(
+                                                                                    builder: (context) => SubscriptionScreen(
+                                                                                      stdId: planController.dropClassValue!,
+                                                                                      medId: planController.dropMediumValue!,
+                                                                                    ),
+                                                                                  ),
+                                                                                );
+                                                                                // planController.dropClassValue =
+                                                                                //     null;
+                                                                                // planController.dropMediumValue =
+                                                                                //     null;
+                                                                              }
+                                                                            })
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                           ],
